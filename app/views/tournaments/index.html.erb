@@ -2,6 +2,23 @@
 
 <h1>Tournaments</h1>
 
+
+<%= month_calendar events: @tournaments do |date, tournaments| %>
+  <%= date.day %>
+
+  <% tournaments.each do |tournament| %>
+
+
+    <div class= <%="tournament#{tournament.tour.acronym}"%>>
+      <%= link_to tournament.name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
+
 <table>
   <thead>
     <tr>
@@ -79,17 +96,6 @@
     <% end %>
   </tbody>
 </table>
-
-<%= month_calendar events: @tournaments do |date, tournaments| %>
-  <%= date.day %>
-
-  <% tournaments.each do |tournament| %>
-    <div>
-      <%= tournament.name %>
-    </div>
-  <% end %>
-<% end %>
-
 
 
 <%= link_to 'New Tournament', new_tournament_path %>
