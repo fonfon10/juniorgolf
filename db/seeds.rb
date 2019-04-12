@@ -16,7 +16,7 @@ Course.delete_all
 Category.delete_all
 Gender.delete_all
 Level.delete_all
-Event.delete_all
+Tournament.delete_all
 
 gender_g = Gender.create!(name: "Girls")
 gender_b = Gender.create!(name: "Boys")
@@ -114,7 +114,7 @@ tour_other = Tour.create!(acronym: "Other",name: "Other", country: country_Canad
 
 
 
-event_qcjunioropen = Event.create!(name:"Quebec Junior Open", tour:tour_cjga, course:course_Hawkesbury, category: category_all, gender: gender_gb, level:level_provincial, days:2, start_date: "05-04-2019", reg_deadline: "04-04-2019", qual_required: 'yes', comments: "", fee: 175.00, url: "https://golfcanada.bluegolf.com/bluegolf/rcga19/event/rcga1962/index.htm")
+tournament_qcjunioropen = Tournament.create!(name:"Quebec Junior Open", tour:tour_cjga, course:course_Hawkesbury, category: category_all, gender: gender_gb, level:level_provincial, days:2, start_time: "05-04-2019", reg_deadline: "04-04-2019", qual_required: 'yes', comments: "", fee: 175.00, url: "https://golfcanada.bluegolf.com/bluegolf/rcga19/tournament/rcga1962/index.htm")
 
 
 

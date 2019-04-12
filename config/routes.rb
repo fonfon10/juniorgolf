@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :tournaments
   resources :levels
   resources :genders
   resources :categories

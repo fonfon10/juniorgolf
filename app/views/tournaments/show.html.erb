@@ -2,58 +2,58 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @event.name %>
+  <%= @tournament.name %>
 </p>
 
 <p>
   <strong>Tour:</strong>
-  <%= @event.tour.name %>
+  <%= @tournament.tour.name %>
 </p>
 
 <p>
   <strong>Course:</strong>
-  <%= @event.course.name %>
+  <%= @tournament.course.name %>
 </p>
 
 <p>
   <strong>Category:</strong>
-  <%= @event.category.name %>
+  <%= @tournament.category.name %>
 </p>
 
 <p>
   <strong>Gender:</strong>
-  <%= @event.gender.name %>
+  <%= @tournament.gender.name %>
 </p>
 
 <p>
   <strong>Level:</strong>
-  <%= @event.level.name %>
+  <%= @tournament.level.name %>
 </p>
 
 <p>
   <strong>Days:</strong>
-  <%= @event.days %>
+  <%= @tournament.days %>
 </p>
 
 <p>
   <strong>Start date:</strong>
-  <%= @event.start_date %>
+  <%= @tournament.start_time %>
 </p>
 
 <p>
   <strong>Reg deadline:</strong>
-  <%= @event.reg_deadline %>
+  <%= @tournament.reg_deadline %>
 </p>
 
 <p>
   <strong>Qual required:</strong>
-  <%= @event.qual_required %>
+  <%= @tournament.qual_required %>
 </p>
 
 <p>
   <strong>Comments:</strong>
-  <%= @event.comments %>
+  <%= @tournament.comments %>
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
+<%= link_to 'Back', tournaments_path %>

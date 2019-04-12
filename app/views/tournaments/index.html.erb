@@ -1,0 +1,95 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tournaments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Tour</th>
+      <th>Course</th>
+      <th>Category</th>
+      <th>Gender</th>
+      <th>Level</th>
+      <th>Days</th>
+      <th>Start</th>
+      <th>Reg deadline</th>
+      <th>Qual required</th>
+      <th>Comments</th>
+      <th>Fee</th>
+      <th>Details/Registration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tournaments.each do |tournament| %>
+      <tr>
+        <td><%= tournament.name %></td>
+        <td><%= link_to tournament.tour.acronym, tournament.tour.url, target: :_blank %></td>
+        <td><%= link_to tournament.course.name, tournament.course.url, target: :_blank %></td>
+        <td><%= tournament.category.name %></td>
+
+
+
+        <td><%= tournament.gender.name %></td>
+        <td><%= tournament.level.name %></td>
+        <td><%= tournament.days %></td>
+        <td><%= tournament.start_time.strftime"%e-%h-%y" %></td>
+        <td><%= tournament.reg_deadline.strftime"%e-%h-%y" %></td>
+
+
+        <td>
+          <% if tournament.qual_required %>
+                  <i class="fa fa-check-square "></i>   
+          <% else %>
+                  <i class="fa fa-square "></i>   
+          <% end %>
+        </td>
+
+
+        <td><%= tournament.comments %></td>
+        <td><%= number_to_currency(tournament.fee) %></td>
+
+
+         <td> <%= link_to tournament.url, target: :_blank   do %> 
+              <i class="fa fa-link "></i>   
+              <% end %> 
+         </td>
+
+
+        <td> <%= link_to tournament do %> 
+              <i class="fa fa-info-circle "></i>   
+              <% end %> 
+         </td>
+        <td> <%= link_to edit_tournament_path(tournament) do %> 
+              <i class="fa fa-edit "></i>   
+              <% end %> 
+         </td>
+
+         <td> <%= link_to tournament, method: :delete, data: { confirm: 'Are you sure?' }  do %> 
+              <i class="fa fa-trash "></i>   
+              <% end %> 
+         </td>
+
+
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= month_calendar events: @tournaments do |date, tournaments| %>
+  <%= date.day %>
+
+  <% tournaments.each do |tournament| %>
+    <div>
+      <%= tournament.name %>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+<%= link_to 'New Tournament', new_tournament_path %>

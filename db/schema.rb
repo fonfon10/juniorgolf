@@ -36,24 +36,6 @@ ActiveRecord::Schema.define(version: 20190404033003) do
     t.string "address"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "name"
-    t.integer "tour_id"
-    t.integer "course_id"
-    t.integer "category_id"
-    t.integer "gender_id"
-    t.integer "level_id"
-    t.integer "days"
-    t.date "start_date"
-    t.date "reg_deadline"
-    t.boolean "qual_required"
-    t.text "comments"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "fee"
-    t.string "url"
-  end
-
   create_table "genders", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -70,6 +52,24 @@ ActiveRecord::Schema.define(version: 20190404033003) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.integer "tour_id"
+    t.integer "course_id"
+    t.integer "category_id"
+    t.integer "gender_id"
+    t.integer "level_id"
+    t.integer "days"
+    t.datetime "start_time"
+    t.datetime "reg_deadline"
+    t.boolean "qual_required"
+    t.text "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "fee"
+    t.string "url"
   end
 
   create_table "tours", force: :cascade do |t|

@@ -36,6 +36,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 
+gem "simple_calendar", "~> 2.0"
 
 
 gem 'activeadmin'

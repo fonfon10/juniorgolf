@@ -1,4 +1,4 @@
 class Tour < ApplicationRecord
 	belongs_to :country
-	has_many :events
+	has_many :tournaments
 end

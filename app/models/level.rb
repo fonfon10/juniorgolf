@@ -1,3 +1,3 @@
 class Level < ApplicationRecord
-	has_many :events
+	has_many :tournaments
 end

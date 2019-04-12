@@ -1,4 +1,4 @@
-class Event < ApplicationRecord
+class Tournament < ApplicationRecord
 	belongs_to :tour 
 	belongs_to :course 
 	belongs_to :category 
