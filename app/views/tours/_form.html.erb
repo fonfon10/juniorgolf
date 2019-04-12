@@ -12,19 +12,21 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :acronym %>
+    <%= form.text_field :acronym, id: :acronym_name %>
+  </div>
+  <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :tour_name %>
   </div>
 
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country, id: :tour_country %>
-  </div>
+
 
   <div class="field">
-    <%= form.label :province %>
-    <%= form.text_field :province, id: :tour_province %>
+    <%= form.label :country %>
+    <%= select_tag(:country_id, options_for_select(@countries), :selected => :country_id)%>
   </div>
+
 
   <div class="actions">
     <%= form.submit %>
