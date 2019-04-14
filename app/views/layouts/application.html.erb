@@ -18,6 +18,17 @@
     </head>
 
   <body>
-    <%= yield %>
-  </body>
+    <%= render 'layouts/navbar'  %>
+
+    <% if user_signed_in?  %>
+      <h3> <%= current_user.email %> </h3>
+    <% end %>
+
+
+    <div id="main-container" class="container-fluid" >
+        <%= yield %>
+    </div>
+        
+
+    </body>
 </html>

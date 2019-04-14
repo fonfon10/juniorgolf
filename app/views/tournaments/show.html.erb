@@ -34,7 +34,10 @@
         <td><%= @tournament.level.name %></td>
         <td><%= @tournament.days %></td>
         <td><%= @tournament.start_time.strftime"%e-%h-%y" %></td>
-        <td><%= @tournament.reg_deadline.strftime"%e-%h-%y" %></td>
+        <td><% if @tournament.reg_deadline != nil %> 
+              <%=  @tournament.reg_deadline.strftime"%e-%h-%y" %>
+            <% end %>  
+        </td>
 
 
         <td>

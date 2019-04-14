@@ -1,5 +1,5 @@
 class TournamentsController < InheritedResources::Base
-
+before_action :authenticate_user!
 before_action :selectors, only: [:new, :edit]
 
 
@@ -32,7 +32,7 @@ end
 
 
 def index
-  @tournaments = Tournament.all
+  @tournaments = Tournament.all.order('days DESC')
 end
 
 
