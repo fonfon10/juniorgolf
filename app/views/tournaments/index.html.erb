@@ -9,8 +9,21 @@
   <% tournaments.each do |tournament| %>
 
 
+
+
+
+
+
+  <% if tournament.qual_required %>
+      <% tournament_name = "*"+tournament.name %>
+  <% else %>
+      <% tournament_name = tournament.name %>    
+  <% end %>
+
+
+
     <div class= <%="tournament#{tournament.tour.acronym}"%>>
-      <%= link_to tournament.name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
+      <%= link_to tournament_name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
     </div>
   <% end %>
 <% end %>

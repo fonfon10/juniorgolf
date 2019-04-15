@@ -14,5 +14,14 @@ Rails.application.routes.draw do
 
 
 
+resources :tournaments do 
+      member do
+        put "registered", to: "tournaments#registered"
+        put "in_consideration", to: "tournaments#in_consideration"
+        put "wait_listed", to: "tournaments#wait_listed"
+        put "donot_attend", to: "tournaments#donot_attend"
+      end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

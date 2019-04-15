@@ -18,7 +18,14 @@ Gender.delete_all
 Level.delete_all
 Tournament.delete_all
 User.delete_all
+Status.delete_all
+Competition.delete_all
 
+
+status_reg = Status.create!(name: "Registered")
+status_inconsideration = Status.create!(name: "In Consideration")
+status_waitlist = Status.create!(name: "Wait Listed")
+status_no = Status.create!(name: "No")
 
 gender_g = Gender.create!(name: "Girls")
 gender_b = Gender.create!(name: "Boys")
@@ -65,7 +72,7 @@ category_all = Category.create!(name: "All")
 
 
 
-User.create!(first_name: "Serge", last_name: "Lafontaine", email: "slafontaine10@gmail.com", dob: "21-01-1971", password: "numb10", password_confirmation: "numb10", ovga_team: true, gender: gender_b, category: category_Juv)
+user_serge = User.create!(first_name: "Serge", last_name: "Lafontaine", email: "slafontaine10@gmail.com", dob: "21-01-1971", password: "numb10", password_confirmation: "numb10", ovga_team: true, gender: gender_b, category: category_Juv)
 
 
 
@@ -137,7 +144,7 @@ tournament_ovga_team_ottawa5 = Tournament.create!(name:"Team Ottawa #5", tour:to
 
 tournament_gq_optimiste_classic_assante = Tournament.create!(name:"Optimiste Classic Assante", tour:tour_gq, course:course_Glendale, category: category_all, gender: gender_gb, level:level_provincial, days: 1, start_time: "15-06-2019", end_time: "16-06-2019",reg_deadline: "31-05-2019", qual_required: false , comments: "", fee: 143.72, url: "https://golfcanada.bluegolf.com/bluegolf/rcga19/event/rcga1995/index.htm")
 tournament_qc_jun_prov_qual = Tournament.create!(name:"QC Junior Prov Qual", tour:tour_gq, course:course_Hawkesbury, category: category_Jun, gender: gender_gb, level:level_provincial, days:1, start_time: "8-7-2019", end_time: "8-7-2019",reg_deadline: "24-06-2019", qual_required: false , comments: "", fee: 63.64 , url: "https://golfcanada.bluegolf.com/bluegolf/rcga19/event/rcga19117/index.htm")
-tournament_ovga_Junior_CandD = Tournament.create!(name:"OVGA Junior City & District", tour:tour_ovga, course:course_Greensmere, category: category_all, gender: gender_gb, level:level_regional, days:2, start_time: "11-7-2019", end_time: "11-7-2019",reg_deadline: "1-7-2019", qual_required: false , comments: "", fee: 126.70, url: "https://golfcanada.bluegolf.com/bluegolf/rcga19/event/rcga19145/index.htm")
+tournament_ovga_Junior_CandD = Tournament.create!(name:"OVGA Junior City & District", tour:tour_ovga, course:course_Greensmere, category: category_all, gender: gender_gb, level:level_regional, days:2, start_time: "11-7-2019", end_time: "12-7-2019",reg_deadline: "1-7-2019", qual_required: false , comments: "", fee: 126.70, url: "https://golfcanada.bluegolf.com/bluegolf/rcga19/event/rcga19145/index.htm")
 tournament_on_junior_girl = Tournament.create!(name:"ON Jr Girls (U19) Championship", tour:tour_go, course:course_Galt, category: category_Jun, gender: gender_g, level:level_provincial, days:4, start_time: "15-7-2019", end_time: "18-7-2019",reg_deadline: "21-06-2019", qual_required: true , comments: "", fee: 195.00 , url: "https://gao.bluegolf.com/bluegolf/gao19/event/gao1932/index.htm")
 tournament_on_junior_boy = Tournament.create!(name:"ON Jr Boys (U19) Championship", tour:tour_go, course:course_TangleCreek, category: category_Jun, gender: gender_b, level:level_provincial, days:4, start_time: "16-7-2019", end_time: "19-7-2019",reg_deadline: "10-05-2019", qual_required: true , comments: "", fee: 195.00 , url: "https://gao.bluegolf.com/bluegolf/gao19/event/gao1930/index.htm")
 tournament_ovga_intersectional = Tournament.create!(name:"OVGA Jr Internationals", tour:tour_ovga, course:course_various, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "21-7-2019", end_time: "21-7-2019",reg_deadline: "", qual_required: true, comments: "club dependant", fee: 0 , url: "https://golfcanada.bluegolf.com/bluegolf/rcga18/event/rcga18352/index.htm")
@@ -162,5 +169,5 @@ tournament_fl_quebec_fall = Tournament.create!(name:"Future Links Fall Series La
 tournament_LoyalistSC = Tournament.create!(name:"Loyalist Junior Showcase", tour:tour_other, course:course_Loyalist, category: category_all, gender: gender_gb, level:level_regional, days:2, start_time: "11-05-2019", end_time: "12-05-2019",reg_deadline: "5-5-2019", qual_required: false, comments: "email: proshop2@loyalistcc.com", fee: 80.0, url: "")
 #tournament_ = Tournament.create!(name:"", tour:tour_, course:course_, category: category_, gender: gender_, level:level_, days:, start_time: "--2019", end_time: "--2019",reg_deadline: "--2019", qual_required: , comments: "", fee: , url: "")
 
-
+competion_LoyalistShowCase = Competition.create!(tournament: tournament_LoyalistSC, status: status_reg, user: user_serge)
 

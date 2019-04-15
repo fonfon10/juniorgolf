@@ -26,6 +26,22 @@ def create
 end
 
 
+def show
+  @tournament = Tournament.find(params[:id])
+
+  if (registration = Competition.find_by user: current_user, tournament: @tournament)
+    @registration_status = registration.status.name
+
+  else
+    @registration_status = "Not Registered"
+    
+  end
+  
+end
+
+
+
+
 def edit
   @tournament = Tournament.find(params[:id])
 end
@@ -33,6 +49,23 @@ end
 
 def index
   @tournaments = Tournament.all.order('days DESC')
+end
+
+
+def registered
+  change_status (1)
+end
+
+def in_consideration
+  change_status (2)
+end
+
+def wait_listed
+  change_status (3)
+end
+
+def donot_attend
+  change_status (4)
 end
 
 
@@ -48,9 +81,28 @@ end
 
 
 
+  def change_status (status)
+    @thisparticipation = Competition.all.find_by_tournament_id_and_user_id(params[:id], current_user.id)
+
+    puts("****** ****** status"+status.to_s)
 
 
-  private
+    if @thisparticipation == nil
+      @thisparticipation= Competition.create(:user_id => current_user.id,
+                          :tournament_id => params[:id],
+                          :status_id   => status)
+    else
+      @thisparticipation.status_id = status
+    end
+
+    puts("****** ****** participation_status"+@thisparticipation.status.id.to_s)
+
+
+
+    @thisparticipation.save 
+    redirect_to tournament_path
+  end
+
 
     def tournament_params
       params.require(:tournament).permit(:name, :tour_id, :course_id, :category_id, :gender_id, :level_id, :days, :start_date, :reg_deadline, :qual_required, :comments)

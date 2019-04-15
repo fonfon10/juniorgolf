@@ -7,6 +7,9 @@ class User < ApplicationRecord
   belongs_to :gender
   belongs_to :category
 
+  has_many :competitions
+
+
   validates_presence_of :first_name, :last_name, :email, :dob
   
 end
