@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   belongs_to :gender
   belongs_to :category
+  belongs_to :user_type
 
   has_many :competitions
 

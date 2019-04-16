@@ -26,6 +26,8 @@ def create
 end
 
 
+
+
 def show
   @tournament = Tournament.find(params[:id])
 
@@ -36,6 +38,11 @@ def show
     @registration_status = "Not Registered"
     
   end
+
+  competitions = Competition.all
+  @registered_comps = @tournament.competitions
+
+
   
 end
 
@@ -48,7 +55,12 @@ end
 
 
 def index
-  @tournaments = Tournament.all.order('days DESC')
+  @tournaments = Tournament.all.order('start_time ASC')
+  Tournament.reorder('reg_deadline')
+  competitions = Competition.all
+  @competitions_of_interest = current_user.competitions.joins(:tournament).reorder('tournaments.reg_deadline')
+
+
 end
 
 
@@ -84,9 +96,6 @@ end
   def change_status (status)
     @thisparticipation = Competition.all.find_by_tournament_id_and_user_id(params[:id], current_user.id)
 
-    puts("****** ****** status"+status.to_s)
-
-
     if @thisparticipation == nil
       @thisparticipation= Competition.create(:user_id => current_user.id,
                           :tournament_id => params[:id],
@@ -94,10 +103,6 @@ end
     else
       @thisparticipation.status_id = status
     end
-
-    puts("****** ****** participation_status"+@thisparticipation.status.id.to_s)
-
-
 
     @thisparticipation.save 
     redirect_to tournament_path

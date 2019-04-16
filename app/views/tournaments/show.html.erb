@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 
+
+
+
 <table>
   <thead>
     <tr>
@@ -81,13 +84,53 @@
 </table>
 
 
-<h1>Registration Status: <%= @registration_status %></h1>
-  <p>
-    <%= link_to 'Registered', registered_tournament_path, method: :put, :class =>  "btn btn-success btn-lg" %> |
-    <%= link_to 'In Consideration', in_consideration_tournament_path, method: :put, :class => "btn btn-warning btn-lg" %> | 
-    <%= link_to 'Waitlisted', wait_listed_tournament_path, method: :put, :class => "btn btn-warning btn-lg" %> | 
-    <%= link_to 'DO NOT ATTEND', donot_attend_tournament_path, method: :put, :class => "btn btn-danger btn-lg" %>
-  </p>
+
+  <% if current_user.user_type.name == "Admin" or current_user.user_type.name == "Player" %>
+    <h1>Registration Status: <%= @registration_status %></h1>
+      <p>
+        <%= link_to 'Registered', registered_tournament_path, method: :put, :class =>  "btn btn-success btn-lg" %> |
+        <%= link_to 'In Consideration', in_consideration_tournament_path, method: :put, :class => "btn btn-warning btn-lg" %> | 
+        <%= link_to 'Waitlisted', wait_listed_tournament_path, method: :put, :class => "btn btn-warning btn-lg" %> | 
+        <%= link_to 'DO NOT ATTEND', donot_attend_tournament_path, method: :put, :class => "btn btn-danger btn-lg" %>
+      </p>
+    
+  <% end %>
+
+
+      <h4>Participant List</h4>
+
+      <% if @registered_comps != nil %>
+         
+
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>First Name</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @registered_comps.each do |reg_user| %>
+                
+                <tr>
+                  <td><%= reg_user.user.first_name %></td>
+                  <td><%= reg_user.user.last_name %></td>
+                  <td><%= reg_user.status.name %></td>
+                </tr>
+
+
+
+            <% end %>
+          </tbody>
+        </table>
+
+       <% end %> 
+
+
+
+
 
 
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |

@@ -3,115 +3,129 @@
 <h1>Tournaments</h1>
 
 
-<%= month_calendar events: @tournaments do |date, tournaments| %>
-  <%= date.day %>
 
-  <% tournaments.each do |tournament| %>
+<div class="container">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+  <div class="row">
+    <div class="col-12 col-md-8">
 
+      <%= month_calendar events: @tournaments do |date, tournaments| %>
+        <%= date.day %>
 
+        <% tournaments.each do |tournament| %>
 
-
-
-
-
-  <% if tournament.qual_required %>
-      <% tournament_name = "*"+tournament.name %>
-  <% else %>
-      <% tournament_name = tournament.name %>    
-  <% end %>
-
-
-
-    <div class= <%="tournament#{tournament.tour.acronym}"%>>
-      <%= link_to tournament_name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
-    </div>
-  <% end %>
-<% end %>
-
-
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Tour</th>
-      <th>Course</th>
-      <th>Category</th>
-      <th>Gender</th>
-      <th>Level</th>
-      <th>Days</th>
-      <th>Start</th>
-      <th>Reg deadline</th>
-      <th>Qual required</th>
-      <th>Comments</th>
-      <th>Fee</th>
-      <th>Details/Registration</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tournaments.each do |tournament| %>
-      <tr>
-        <td><%= tournament.name %></td>
-        <td><%= link_to tournament.tour.acronym, tournament.tour.url, target: :_blank %></td>
-        <td><%= link_to tournament.course.name, tournament.course.url, target: :_blank %></td>
-        <td><%= tournament.category.name %></td>
-
-
-
-        <td><%= tournament.gender.name %></td>
-        <td><%= tournament.level.name %></td>
-        <td><%= tournament.days %></td>
-        <td><%= tournament.start_time.strftime"%e-%h-%y" %></td>
-        <td><% if tournament.reg_deadline != nil %> 
-              <%=  tournament.reg_deadline.strftime"%e-%h-%y" %>
-            <% end %>  
-        </td>
-
-
-        <td>
           <% if tournament.qual_required %>
-                  <i class="fa fa-check-square "></i>   
+              <% tournament_name = "*"+tournament.name %>
           <% else %>
-                  <i class="fa fa-square "></i>   
+              <% tournament_name = tournament.name %>    
           <% end %>
-        </td>
 
+          <div class= <%="tournament#{tournament.tour.acronym}"%>>
+            <%= link_to tournament_name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
+          </div>
+        <% end %>
+      <% end %>
 
-        <td><%= tournament.comments %></td>
-        <td><%= number_to_currency(tournament.fee) %></td>
-
-
-         <td> <%= link_to tournament.url, target: :_blank   do %> 
-              <i class="fa fa-link "></i>   
-              <% end %> 
-         </td>
-
-
-        <td> <%= link_to tournament do %> 
-              <i class="fa fa-info-circle "></i>   
-              <% end %> 
-         </td>
-        <td> <%= link_to edit_tournament_path(tournament) do %> 
-              <i class="fa fa-edit "></i>   
-              <% end %> 
-         </td>
-
-         <td> <%= link_to tournament, method: :delete, data: { confirm: 'Are you sure?' }  do %> 
-              <i class="fa fa-trash "></i>   
-              <% end %> 
-         </td>
+    </div>
 
 
 
 
-      </tr>
+
+  <% if current_user.user_type.name == "Admin" or current_user.user_type.name == "Player" %>
+
+    <div class="col-6 col-md-4">
+
+      <br><br><br>
+      <h4>Competitions of Interest</h4>
+
+      <% if @competitions_of_interest != nil %>
+         
+
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Start</th>
+              <th>Deadline</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @competitions_of_interest.each do |competition| %>
+
+              <% if competition.status.name != "No" %>
+                
+                <tr>
+
+                 <td> <%= link_to competition.tournament  do %> 
+                      <i class="fa fa-info-circle "></i>   
+                      <% end %> 
+                 </td>
+
+                  <td><%= link_to competition.tournament.name, competition.tournament %></td>
+                  <td><%= competition.tournament.start_time.strftime"%e-%h" %></td>
+                  <td><% if competition.tournament.reg_deadline != nil %> 
+                        <%=  competition.tournament.reg_deadline.strftime"%e-%h" %>
+                      <% end %>  
+                  </td>
+                  <td><%= competition.status.name %></td>
+                </tr>
+
+              <% end %>
+
+
+            <% end %>
+          </tbody>
+        </table>
+
+       <% end %> 
+
+    </div>
+
     <% end %>
-  </tbody>
-</table>
+
+
+
+  <% if current_user.user_type.name == "Operator" %>
+
+
+    <% if @tournaments != nil %>
+      <table class="table-striped">
+
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Start</th>
+            <th>Deadline</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @tournaments.each do |tournament| %>                
+              <tr>
+                <td class= <%="tournament#{tournament.tour.acronym}"%>><%= link_to tournament.name, tournament, :class => "tournament#{tournament.tour.acronym}"   %></td>
+                <td><%= tournament.start_time.strftime"%e-%h" %></td>
+                <td><% if tournament.reg_deadline != nil %> 
+                      <%=  tournament.reg_deadline.strftime"%e-%h" %>
+                    <% end %>  
+                </td>
+              </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %> 
+  <% end %>
+
+
+
+
+  </div>
+
+
+</div>
 
 
 <%= link_to 'New Tournament', new_tournament_path %>

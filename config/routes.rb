@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_types
   resources :tournaments
   resources :levels
   resources :genders

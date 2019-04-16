@@ -20,7 +20,14 @@ Tournament.delete_all
 User.delete_all
 Status.delete_all
 Competition.delete_all
+UserType.delete_all
 
+
+
+ut_admin = UserType.create!(name: "Admin")
+ut_player = UserType.create!(name: "Player")
+ut_Operator = UserType.create!(name: "Operator")
+ut_Observer = UserType.create!(name: "Observer")
 
 status_reg = Status.create!(name: "Registered")
 status_inconsideration = Status.create!(name: "In Consideration")
@@ -72,7 +79,10 @@ category_all = Category.create!(name: "All")
 
 
 
-user_serge = User.create!(first_name: "Serge", last_name: "Lafontaine", email: "slafontaine10@gmail.com", dob: "21-01-1971", password: "numb10", password_confirmation: "numb10", ovga_team: true, gender: gender_b, category: category_Juv)
+user_serge = User.create!(first_name: "Serge", last_name: "Lafontaine", email: "slafontaine10@gmail.com", user_type: ut_admin, dob: "21-01-1971", password: "numb10", password_confirmation: "numb10", ovga_team: true, gender: gender_b, category: category_all)
+user_ashley = User.create!(first_name: "Ashley", last_name: "Lafontaine", email: "ashleylafontaine27@gmail.com", user_type: ut_player, dob: "27-04-2004", password: "numb10", password_confirmation: "numb10", ovga_team: true, gender: gender_g, category: category_Juv)
+user_derek = User.create!(first_name: "Derek", last_name: "MacDonald", email: "Derek.MacDonald@marshesgolfclub.com", user_type: ut_Operator, dob: "21-01-1971", password: "golf123", password_confirmation: "golf123", ovga_team: true, gender: gender_b, category: category_all)
+user_jim = User.create!(first_name: "Jim", last_name: "Davidson", email: "jadavidson@bell.net",user_type: ut_Operator, dob: "21-01-1971", password: "golf123", password_confirmation: "golf123", ovga_team: true, gender: gender_b, category: category_all)
 
 
 
@@ -113,6 +123,16 @@ course_Lachute = Course.create!(name: "Lachute", address: "355 Avenue Béthany",
 course_Loyalist = Course.create!(name: "Loyalist G&CC", address: "1 Loyalist Blvd", city: "Bath", province: province_Ontario , country: country_Canada, zip: "K0H 1G0", url: "http://www.loyalistcc.com/" )
 course_montcalm = Course.create!(name: "Montcalm GC", address: "1800, chemin Nadeau", city: "Saint-Liguori", province: province_Quebec , country: country_Canada, zip: "J0K 2X0", url: "http://www.golfmontcalm.qc.ca/" )
 course_various = Course.create!(name: "Various", address: "TBD", city: "TBD", province: province_Ontario , country: country_Canada, zip: "TBD", url: "TBD" )
+
+course_RideauView = Course.create!(name: "Rideau View GC", address: "6044 Rideau Valley Dr N", city: "Manotick", province: province_Ontario , country: country_Canada, zip: "K4M 1B3", url: "https://www.rideauview.com/" )
+course_Cornwall = Course.create!(name: "Corwall G&CC", address: "6740 Sutherland Ave", city: "Cornwall", province: province_Ontario , country: country_Canada, zip: "K6H 7J3", url: "http://cornwallgolf.com/" )
+course_Carleton = Course.create!(name: "Carleton G&YC", address: "6627 Marina Drive", city: "Manotick", province: province_Ontario , country: country_Canada, zip: "K4M 1B3", url: "http://carletongolf.com/" )
+course_Prescott = Course.create!(name: "Prescott GC", address: "900 Boundary Street", city: "Prescott", province: province_Ontario , country: country_Canada, zip: "K0E 1T0", url: "http://prescottgolfclub.ca/" )
+course_CedarHill = Course.create!(name: "Cedarhill G&CC", address: "56 Cedarhill Drive", city: "Ottawa", province: province_Ontario , country: country_Canada, zip: "K2R 1C5", url: "http://www.cedarhillgolf.com/" )
+course_UpperCanada = Course.create!(name: "Upper Canada GC", address: "13745 County Road 2", city: "Morrisburg", province: province_Ontario , country: country_Canada, zip: "K0C 1X0", url: "https://www.uppercanadagolf.com/" )
+course_SmithsFalls = Course.create!(name: "Smiths Falls G&CC", address: "125 Golf Club Rd ", city: "Smiths Falls", province: province_Ontario , country: country_Canada, zip: "K7A 4S5", url: "https://www.smithsfallsgolf.com/" )
+course_kanata = Course.create!(name: "Kanata G&CC", address: "7000 Campeau Dr", city: "Kanata", province: province_Ontario , country: country_Canada, zip: "K2T 0A3", url: "https://kanata.clublink.ca/" )
+course_Equinelle = Course.create!(name: "eQuinelle GC", address: "140 Equinelle Drive RR4", city: "Kemptville", province: province_Ontario , country: country_Canada, zip: "K0G 1J0", url: "https://equinellegolf.ca/" )
 #course_ = Course.create!(name: "", address: "", city: "", province: province_ , country: country_Canada, zip: "", url: "" )
 
 
@@ -167,7 +187,21 @@ tournament_qc_interregional = Tournament.create!(name:"QC Interregional", tour:t
 tournament_fl_quebec_fall = Tournament.create!(name:"Future Links Fall Series Lachute", tour:tour_fl, course:course_Lachute, category: category_Jun, gender: gender_gb, level:level_national, days:3, start_time: "20-09-2019", end_time: "22-09-2019",reg_deadline: "21-08-2019", qual_required: true, comments: "", fee: 250.00, url: "https://golfcanada.bluegolf.com/bluegolf/rcga19/event/rcga1930/index.htm?")
 
 tournament_LoyalistSC = Tournament.create!(name:"Loyalist Junior Showcase", tour:tour_other, course:course_Loyalist, category: category_all, gender: gender_gb, level:level_regional, days:2, start_time: "11-05-2019", end_time: "12-05-2019",reg_deadline: "5-5-2019", qual_required: false, comments: "email: proshop2@loyalistcc.com", fee: 80.0, url: "")
+tournament_RideauView = Tournament.create!(name:"Rideau View", tour:tour_pjgt, course:course_RideauView, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "19-05-2019", end_time: "19-05-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_Cornwall = Tournament.create!(name:"Cornwall", tour:tour_pjgt, course:course_Cornwall, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "26-05-2019", end_time: "26-05-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_Carleton = Tournament.create!(name:"Carleton", tour:tour_pjgt, course:course_Carleton, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "28-06-2019", end_time: "28-06-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_Prescott = Tournament.create!(name:"Prescott", tour:tour_pjgt, course:course_Prescott, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "5-7-2019", end_time: "5-7-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_Brockville = Tournament.create!(name:"Brockville", tour:tour_pjgt, course:course_BrockvilleCC, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "9-7-2019", end_time: "9-7-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_CedarHills = Tournament.create!(name:"Cedarhill", tour:tour_pjgt, course:course_CedarHill, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "22-7-2019", end_time: "22-7-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_UpperCan = Tournament.create!(name:"Upper Canada", tour:tour_pjgt, course:course_UpperCanada, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "1-8-2019", end_time: "1-8-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_SmithsFalls = Tournament.create!(name:"Smiths Fall", tour:tour_pjgt, course:course_SmithsFalls, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "7-8-2019", end_time: "7-8-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_Kanata = Tournament.create!(name:"Kanata", tour:tour_pjgt, course:course_kanata, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "12-8-2019", end_time: "12-8-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+tournament_Equinelle = Tournament.create!(name:"eQuinelle", tour:tour_pjgt, course:course_Equinelle, category: category_all, gender: gender_gb, level:level_regional, days:1, start_time: "21-8-2019", end_time: "21-8-2019",reg_deadline: "", qual_required: false, comments: "", fee: 50.0 , url: "https://www.pjgtour.com/tournaments.html")
+
+
+
 #tournament_ = Tournament.create!(name:"", tour:tour_, course:course_, category: category_, gender: gender_, level:level_, days:, start_time: "--2019", end_time: "--2019",reg_deadline: "--2019", qual_required: , comments: "", fee: , url: "")
 
 competion_LoyalistShowCase = Competition.create!(tournament: tournament_LoyalistSC, status: status_reg, user: user_serge)
+competion_LoyalistShowCase = Competition.create!(tournament: tournament_LoyalistSC, status: status_reg, user: user_ashley)
 
