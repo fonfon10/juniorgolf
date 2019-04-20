@@ -21,10 +21,11 @@
     <%= f.date_field :dob, autofocus: true %>
   </div>
 
-
   <div>
     <%= @user.gender.name %>
   </div>
+
+  <p><%= @gender_bin_boy  %>   /  <%= @gender_bin_girl %></p>
 
   <div>
     <%= @user.category.name %>

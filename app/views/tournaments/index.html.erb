@@ -6,25 +6,54 @@
 
 <div class="container">
   <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-  <div class="row">
-    <div class="col-12 col-md-8">
+    <div>
 
       <%= month_calendar events: @tournaments do |date, tournaments| %>
         <%= date.day %>
 
         <% tournaments.each do |tournament| %>
 
-          <% if tournament.qual_required %>
-              <% tournament_name = "*"+tournament.name %>
+        <!-- TEAM OTTAWA filter -->
+          <% if tournament.tour.acronym == "TO" %>
+            <% if current_user.ovga_team %>
+              <% if tournament.qual_required %>
+                  <% tournament_name = "*"+tournament.name %>
+              <% else %>
+                  <% tournament_name = tournament.name %>    
+              <% end %>
+
+              <div class= <%="tournament#{tournament.tour.acronym}"%>>
+                <%= link_to tournament_name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
+              </div>
+            <% end %> 
+
+
+
           <% else %>
-              <% tournament_name = tournament.name %>    
+          <!-- ALL OTHERS -->
+            <% if tournament.qual_required %>
+                <% tournament_name = "*"+tournament.name %>
+            <% else %>
+                <% tournament_name = tournament.name %>    
+            <% end %>
+
+            <div class= <%="tournament#{tournament.tour.acronym}"%>>
+              <%= link_to tournament_name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
+            </div>
+
           <% end %>
 
-          <div class= <%="tournament#{tournament.tour.acronym}"%>>
-            <%= link_to tournament_name, tournament, :class => "tournament#{tournament.tour.acronym}"  %>
-          </div>
         <% end %>
+
+
+
       <% end %>
+
+
+      <p>National:<span class= "tournamentGC">Golf Canada/Future Links</span>   <span class= "tournamentCJGA">CJGA</span> </p>
+      <p>Provincial:<span class= "tournamentGO">Golf Ontario</span> <span class= "tournamentGQ">Golf Quebec</span></p>
+      <p>Regional:<span class= "tournamentOVGA">OVGA</span>  <span class= "tournamentPJGT">Play Junior Golf Tour</span></p>
+      <p>* indicates qualification required</p>
 
     </div>
 
@@ -34,9 +63,8 @@
 
   <% if current_user.user_type.name == "Admin" or current_user.user_type.name == "Player" %>
 
-    <div class="col-6 col-md-4">
+    <div>
 
-      <br><br><br>
       <h4>Competitions of Interest</h4>
 
       <% if @competitions_of_interest != nil %>
@@ -50,6 +78,7 @@
               <th>Start</th>
               <th>Deadline</th>
               <th>Status</th>
+              <th>#</th>
             </tr>
           </thead>
 
@@ -72,6 +101,12 @@
                       <% end %>  
                   </td>
                   <td><%= competition.status.name %></td>
+                  <td><% if @competitions_status[competition.tournament.id] != nil %>
+                          <%= @competitions_status[competition.tournament.id] %>
+                      <% end %> 
+
+
+                  </td>
                 </tr>
 
               <% end %>
@@ -83,7 +118,6 @@
 
        <% end %> 
 
-    </div>
 
     <% end %>
 
@@ -128,4 +162,3 @@
 </div>
 
 
-<%= link_to 'New Tournament', new_tournament_path %>

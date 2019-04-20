@@ -83,6 +83,7 @@ user_serge = User.create!(first_name: "Serge", last_name: "Lafontaine", email: "
 user_ashley = User.create!(first_name: "Ashley", last_name: "Lafontaine", email: "ashleylafontaine27@gmail.com", user_type: ut_player, dob: "27-04-2004", password: "numb10", password_confirmation: "numb10", ovga_team: true, gender: gender_g, category: category_Juv)
 user_derek = User.create!(first_name: "Derek", last_name: "MacDonald", email: "Derek.MacDonald@marshesgolfclub.com", user_type: ut_Operator, dob: "21-01-1971", password: "golf123", password_confirmation: "golf123", ovga_team: true, gender: gender_b, category: category_all)
 user_jim = User.create!(first_name: "Jim", last_name: "Davidson", email: "jadavidson@bell.net",user_type: ut_Operator, dob: "21-01-1971", password: "golf123", password_confirmation: "golf123", ovga_team: true, gender: gender_b, category: category_all)
+user_izzy = User.create!(first_name: "Izzy", last_name: "Ferguson", email: "dgfergy@gmail.com",user_type: ut_player, dob: "10-10-2004", password: "golf123", password_confirmation: "golf123", ovga_team: false, gender: gender_g, category: category_Bantam)
 
 
 

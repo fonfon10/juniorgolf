@@ -55,10 +55,94 @@ end
 
 
 def index
-  @tournaments = Tournament.all.order('start_time ASC')
+
+
+#  if (current_user.gender.name == "Girls")
+#   gender_id = [1,3]
+#  else
+#   gender_id = [2,3] 
+#  end
+
+  case current_user.gender_id
+    when 1 
+      gender_id = [1,3]
+    when 2
+      gender_id = [2,3]
+    when 3 
+      gender_id = [1,2,3]
+  end
+
+
+  category_id = [31]
+
+  #ATOM
+  if (current_user.category_id.to_s(2).rjust(5, "0")[4])=="1" 
+    (0..14).each {|i| category_id << 2*i+1}        
+  end
+  
+  #PEE-WEE
+  if (current_user.category_id.to_s(2).rjust(5, "0")[3])=="1" 
+    (0..7).each do |i| 
+      category_id << 4*i+2
+      category_id << 4*i+3
+    end        
+  end
+
+  #BANTAM
+  if (current_user.category_id.to_s(2).rjust(5, "0")[2])=="1" 
+    (0..3).each do |i| 
+      category_id << 8*i+4
+      category_id << 8*i+5
+      category_id << 8*i+6
+      category_id << 8*i+7
+    end        
+  end
+
+  #JUV
+  if (current_user.category_id.to_s(2).rjust(5, "0")[1])=="1" 
+    (0..1).each do |i| 
+      category_id << 16*i+8
+      category_id << 16*i+9
+      category_id << 16*i+10
+      category_id << 16*i+11
+      category_id << 16*i+12
+      category_id << 16*i+13
+      category_id << 16*i+14
+      category_id << 16*i+15
+    end        
+  end
+
+  #JUNIOR
+  if (current_user.category_id.to_s(2).rjust(5, "0")[0])=="1" 
+    (16..30).each {|i| category_id << i}        
+  end
+
+
+  category_id.sort!.uniq!
+
+
+  @tournaments = Tournament.all.gender_filter(gender_id).
+                  category_filter(category_id).order('start_time ASC')
   Tournament.reorder('reg_deadline')
   competitions = Competition.all
   @competitions_of_interest = current_user.competitions.joins(:tournament).reorder('tournaments.reg_deadline')
+
+  @competitions_status = Hash.new
+
+  competitions.each do |comp|
+
+    if comp.status.name != "No" and comp.status.name != nil
+
+      if @competitions_status[comp.tournament.id] == nil 
+        @competitions_status[comp.tournament.id] = 1
+      else  
+        @competitions_status[comp.tournament.id] = @competitions_status[comp.tournament.id] + 1
+      end
+      
+    end
+
+  end
+
 
 
 end
@@ -79,6 +163,7 @@ end
 def donot_attend
   change_status (4)
 end
+
 
 
   private

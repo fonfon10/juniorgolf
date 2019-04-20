@@ -26,6 +26,14 @@ def create
 end
 
 
+def edit
+  @user = User.find(params[:id])
+  @gender_bin_boy = @user.gender_id.to_s(2).rjust(2, "0")[0]
+  @gender_bin_girl = @user.gender_id.to_s(2).rjust(2, "0")[1]
+end
+
+
+
   private
 
     def user_params
